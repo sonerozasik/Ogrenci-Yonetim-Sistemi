@@ -1,0 +1,28 @@
+img{
+    width: 100px;
+    margin-right: 10px;
+}
+
+.table> tbody > tr:nth-child(even) > td, .table > tbody > tr:nth-child(even) > th {
+    background-color: #e2e9fc
+ }
+
+ .bg-red{
+    background-color: red;
+ }
+
+ .bg-blue{
+    background-color: blue;
+ }
+
+ .bg-green{
+    background-color: green;
+ }
+
+ .button{
+    color: white;
+    width: 70px;
+    margin-left: 3px;
+    padding-top: 2px;
+    padding-bottom: 4px;
+ }
