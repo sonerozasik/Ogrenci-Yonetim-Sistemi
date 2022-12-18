@@ -81,30 +81,30 @@
               </button>
             </div>
             <div class="modal-body">
-                <form class="row needs-validation" novalidate>
+                <form id="addStudentForm" class="row needs-validation" novalidate>
                     <div class="row">
                         <div class="has-validation col-12 col-md-6 p-2">
-                            <label for="name" class="form-label">İsim</label>
-                            <input class="form-control mt-2" type="text" name="name" id="name" placeholder="Soner" pattern="[A-Za-z]{3,}" required>
+                            <label for="fname" class="form-label">İsim</label>
+                            <input class="form-control mt-2" type="text" name="fname" id="fname" placeholder="Soner" pattern="[A-Za-zŞşÇçİÜüĞğÖö]{3,}" required>
                             <div class="invalid-feedback">İsim en az 3 harf içermelidir</div>
                         </div>
                         <div class="col-12 col-md-6 p-2">
-                            <label for="surname" class="form-label">Soyisim</label>
-                            <input class="form-control  mt-2" type="text" name="surname" id="surname" placeholder="Özaşık" pattern="[A-Za-z]{3,}" required>
+                            <label for="lname" class="form-label">Soyisim</label>
+                            <input class="form-control  mt-2" type="text" name="lname" id="lname" placeholder="Özaşık" pattern="[A-Za-zŞşÇçİÜüĞğÖö]{3,}" required>
                             <div class="invalid-feedback">Soyisim en az 3 harf içermelidir</div>
 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6 p-2">
-                            <label for="name" class="form-label">Öğrenci Numarası</label>
+                            <label for="num" class="form-label">Öğrenci Numarası</label>
                             <input class="form-control  mt-2" type="number" name="num" id="num" placeholder="152120181069" min="100000000000" max="999999999999" required>
                             <div class="invalid-feedback">Öğrenci numarası 12 harf içermelidir</div>
 
                         </div>
                         <div class="col-12 col-md-6 p-2">
                             <label for="surname" class="form-label">Bölüm</label>
-                            <select class="form-select  mt-2" id="dept" required>
+                            <select class="form-select  mt-2" name="dept" id="dept" required>
                                 <option value="" disabled selected>Bölüm Seçiniz</option>
                                 <option value="1">Bilgisayar Müh.</option>
                                 <option value="2">Elektrik-Elektronik Müh.</option>
@@ -117,20 +117,21 @@
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6 p-2">
-                            <label for="birthplace" class="form-label" >Doğum Yeri</label>
-                            <input class="form-control mt-2" type="text" name="birthplace" id="birthplace" placeholder="Mustafakemalpaşa" pattern="[A-Za-z]{3,}" required>
+                            <label for="pob" class="form-label" >Doğum Yeri</label>
+                            <input class="form-control mt-2" type="text" name="pob" id="pob" placeholder="Mustafakemalpaşa" pattern="[A-Za-zŞşÇçİÜüĞğÖö]{3,}" required>
                             <div class="invalid-feedback">Doğum yeri en az 3 harf içermelidir</div>
 
                         </div>
                         <div class="col-12 col-md-6 p-2">
-                            <label for="birthdate" class="form-label">Doğum Tarihi</label>
-                            <input class="form-control mt-2" type="date" name="birthdate" id="birthdate" required>
+                            <label for="dob" class="form-label">Doğum Tarihi</label>
+                            <input class="form-control mt-2" type="date" name="dob" id="dob" required>
                             <div class="invalid-feedback">Tarih seçiniz</div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Add</button>
+
                       </div>
                 </form>
             </div>
@@ -162,4 +163,31 @@
             }, false)
         })
     })()
+
+    const addstudentform = document.querySelector('#addStudentForm');
+    addstudentform.addEventListener('submit',function (e){
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const searchParams = new URLSearchParams();
+    
+    for(const pair of formData){
+        searchParams.append(pair[0],pair[1]);
+    } 
+    
+
+    fetch('http://localhost:3000/students',
+    {
+        method:'post',
+        body : searchParams
+    
+    }).then(function(response){
+        console.log(response)
+    }).catch(function(e){
+        console.log(e);
+    })
+
+    })
+
+
 </script>
