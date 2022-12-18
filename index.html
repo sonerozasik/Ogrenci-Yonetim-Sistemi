@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <script src="script.js"></script>
     <script src="data.js"></script>
+    <!-- For using Modals -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.6.2.js"
+        integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4="
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body onload="renderAll()">
@@ -32,9 +38,9 @@
             </div>
             <div class="col-12 pt-5 px-5 d-flex justify-content-between mb-2">
                 <h3 class="col-10">Öğrenci Listesi</h3>
-                <div class="btn bg-primary text-white p-0 px-3">
-                    <i class="bi bi-person-plus fs-3"></i>
-                </div>
+                <button class="btn bg-primary text-white p-0 px-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="bi bi-person-plus fs-3" ></i>
+                </button>
             </div>
             <div id="table-container" class="row">
                 <table  class="table m-0">
@@ -65,9 +71,95 @@
         </div>
 
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="text-start" id="exampleModalLabel"> <i class="bi bi-info-circle-fill text-primary"></i> Eklenecek Öğrenci Bilgileri</h5>
+              <button type="button" class="btn close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">x</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form class="row needs-validation" novalidate>
+                    <div class="row">
+                        <div class="has-validation col-12 col-md-6 p-2">
+                            <label for="name" class="form-label">İsim</label>
+                            <input class="form-control mt-2" type="text" name="name" id="name" placeholder="Soner" pattern="[A-Za-z]{3,}" required>
+                            <div class="invalid-feedback">İsim en az 3 harf içermelidir</div>
+                        </div>
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="surname" class="form-label">Soyisim</label>
+                            <input class="form-control  mt-2" type="text" name="surname" id="surname" placeholder="Özaşık" pattern="[A-Za-z]{3,}" required>
+                            <div class="invalid-feedback">Soyisim en az 3 harf içermelidir</div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="name" class="form-label">Öğrenci Numarası</label>
+                            <input class="form-control  mt-2" type="number" name="num" id="num" placeholder="152120181069" min="100000000000" max="999999999999" required>
+                            <div class="invalid-feedback">Öğrenci numarası 12 harf içermelidir</div>
+
+                        </div>
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="surname" class="form-label">Bölüm</label>
+                            <select class="form-select  mt-2" id="dept" required>
+                                <option value="" disabled selected>Bölüm Seçiniz</option>
+                                <option value="1">Bilgisayar Müh.</option>
+                                <option value="2">Elektrik-Elektronik Müh.</option>
+                                <option value="3">Endüstri Müh.</option>
+                                <option value="4">İnşaat Müh.</option>
+                            </select>
+                            <div class="invalid-feedback">Bölüm seçiniz</div>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="birthplace" class="form-label" >Doğum Yeri</label>
+                            <input class="form-control mt-2" type="text" name="birthplace" id="birthplace" placeholder="Mustafakemalpaşa" pattern="[A-Za-z]{3,}" required>
+                            <div class="invalid-feedback">Doğum yeri en az 3 harf içermelidir</div>
+
+                        </div>
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="birthdate" class="form-label">Doğum Tarihi</label>
+                            <input class="form-control mt-2" type="date" name="birthdate" id="birthdate" required>
+                            <div class="invalid-feedback">Tarih seçiniz</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                      </div>
+                </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
 </body>
 </html>
 
 <script>
+    (() => {
+        'use strict'
 
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+
+                console.log(form)
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+            }, false)
+        })
+    })()
 </script>

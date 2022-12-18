@@ -6,6 +6,7 @@ function renderAll(){
   getStudents();
   renderPageNums();
   renderPerPageButtons();
+
 }
 
 
@@ -33,7 +34,7 @@ function renderTable(students){
           <td class="px-5">${items[i].fname + ' ' + items[i].lname}</td>
           <td class="d-none d-md-table-cell">${items[i].num}</td>
           <td class="d-none d-lg-table-cell">${depts[items[i].dept]}</td>
-          <td class="d-none d-lg-table-cell"> 
+          <td> 
           <button class="btn button bg-red">Sil</button>
           <button class="btn button bg-blue">Düzenle</button>
           <button class="btn button bg-green">Detay</button>
@@ -123,3 +124,6 @@ function renderPerPageButtons(){
 
       perPageNumsDiv.innerHTML = template;
 }
+
+
+
