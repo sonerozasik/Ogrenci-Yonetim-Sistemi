@@ -38,7 +38,7 @@
             </div>
             <div class="col-12 pt-5 px-5 d-flex justify-content-between mb-2">
                 <h3 class="col-10">Öğrenci Listesi</h3>
-                <button class="btn bg-primary text-white p-0 px-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button class="btn bg-primary text-white p-0 px-3" data-bs-toggle="modal" data-bs-target="#addStudentsModal">
                     <i class="bi bi-person-plus fs-3" ></i>
                 </button>
             </div>
@@ -71,11 +71,11 @@
         </div>
 
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addStudentsModal" tabindex="-1" role="dialog" aria-labelledby="addStudentsModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-                <h5 class="text-start" id="exampleModalLabel"> <i class="bi bi-info-circle-fill text-primary"></i> Eklenecek Öğrenci Bilgileri</h5>
+                <h5 class="text-start" id="addStudentsModalLabel"> <i class="bi bi-info-circle-fill text-primary"></i> Eklenecek Öğrenci Bilgileri</h5>
               <button type="button" class="btn close" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">x</span>
               </button>
@@ -103,7 +103,7 @@
 
                         </div>
                         <div class="col-12 col-md-6 p-2">
-                            <label for="surname" class="form-label">Bölüm</label>
+                            <label for="dept" class="form-label">Bölüm</label>
                             <select class="form-select  mt-2" name="dept" id="dept" required>
                                 <option value="" disabled selected>Bölüm Seçiniz</option>
                                 <option value="1">Bilgisayar Müh.</option>
@@ -132,6 +132,60 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Add</button>
 
+                      </div>
+                </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- --------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+      <div class="modal fade" id="studentInfoModal" tabindex="-1" role="dialog" aria-labelledby="studentInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="text-start" id="studentInfoModalLabel"> <i class="bi bi-info-circle-fill text-primary"></i> Öğrenci Bilgileri</h5>
+              <button type="button" class="btn close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">x</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form id="studentInfoForm" class="row" novalidate>
+                    <div class="row">
+                        <div class="has-validation col-12 col-md-6 p-2">
+                            <label for="fname" class="form-label">İsim</label>
+                            <input class="form-control mt-2" type="text" id="si_fname" disabled>
+                        </div>
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="lname" class="form-label">Soyisim</label>
+                            <input class="form-control  mt-2" type="text" id="si_lname" disabled>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="num" class="form-label">Öğrenci Numarası</label>
+                            <input class="form-control  mt-2" type="number" id="si_num" disabled>
+                        </div>
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="si_dept" class="form-label">Bölüm</label>
+                            <input class="form-control  mt-2" type="text" id="si_dept" disabled>                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="pob" class="form-label" >Doğum Yeri</label>
+                            <input class="form-control mt-2" type="text" id="si_pob" disabled>
+                        </div>
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="dob" class="form-label">Doğum Tarihi</label>
+                            <input class="form-control mt-2" type="text" id="si_dob" disabled>
+                            <div class="invalid-feedback">Tarih seçiniz</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                       </div>
                 </form>
             </div>

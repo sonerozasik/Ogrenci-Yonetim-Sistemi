@@ -37,10 +37,10 @@ function renderTable(){
           <td class="px-5">${items[i].fname + ' ' + items[i].lname}</td>
           <td class="d-none d-md-table-cell">${items[i].num}</td>
           <td class="d-none d-lg-table-cell">${depts[items[i].dept]}</td>
-          <td> 
-          <button class="btn button bg-red" id="${items[i].id}" onclick="deleteStudent(this.id)">Sil</button>
+          <td id="${items[i].id}"> 
+          <button class="btn button bg-red" onclick="deleteStudent($(this).parent().attr('id'))">Sil</button>
           <button class="btn button bg-blue">Düzenle</button>
-          <button class="btn button bg-green">Detay</button>
+          <button class="btn button bg-green" data-bs-toggle="modal" data-bs-target="#studentInfoModal" onclick="displayStudent($(this).parent().attr('id'))">Detay</button>
           </td>
         </tr>
         `;
@@ -95,6 +95,8 @@ function renderTexts(){
 }
 
 function deleteStudent(id){
+  console.log(id)
+  
   fetch('http://localhost:3000/students/'+id,
       {
           method:'delete',
@@ -106,5 +108,27 @@ function deleteStudent(id){
       fetchDataAndRender();
   }
 
+
+function displayStudent(id){
+  let student;
+  const fname = document.querySelector('#si_fname');
+  const lname = document.querySelector('#si_lname');
+  const dept = document.querySelector('#si_dept');
+  const num = document.querySelector('#si_num');
+  const dob = document.querySelector('#si_dob');
+  const pob = document.querySelector('#si_pob');
+
+  fetch('http://localhost:3000/students/'+id)
+    .then((response)=>response.json())
+    .then((data)=> {
+      fname.value = data.fname;
+      lname.value = data.lname;
+      dept.value = depts[data.dept];
+      num.value = data.num;
+      dob.value = data.dob;
+      pob.value = data.pob;
+    
+    })
+}
   
 
