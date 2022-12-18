@@ -85,12 +85,12 @@
                     <div class="row">
                         <div class="has-validation col-12 col-md-6 p-2">
                             <label for="fname" class="form-label">İsim</label>
-                            <input class="form-control mt-2" type="text" name="fname" id="fname" placeholder="Soner" pattern="[A-Za-zŞşÇçİÜüĞğÖö]{3,}" required>
+                            <input class="form-control mt-2" type="text" name="fname" id="fname" placeholder="Soner" pattern="[A-Za-zŞşÇçİÜüĞğÖöı]{3,}" required>
                             <div class="invalid-feedback">İsim en az 3 harf içermelidir</div>
                         </div>
                         <div class="col-12 col-md-6 p-2">
                             <label for="lname" class="form-label">Soyisim</label>
-                            <input class="form-control  mt-2" type="text" name="lname" id="lname" placeholder="Özaşık" pattern="[A-Za-zŞşÇçİÜüĞğÖö]{3,}" required>
+                            <input class="form-control  mt-2" type="text" name="lname" id="lname" placeholder="Özaşık" pattern="[A-Za-zŞşÇçİÜüĞğÖöı]{3,}" required>
                             <div class="invalid-feedback">Soyisim en az 3 harf içermelidir</div>
 
                         </div>
@@ -118,7 +118,7 @@
                     <div class="row">
                         <div class="col-12 col-md-6 p-2">
                             <label for="pob" class="form-label" >Doğum Yeri</label>
-                            <input class="form-control mt-2" type="text" name="pob" id="pob" placeholder="Mustafakemalpaşa" pattern="[A-Za-zŞşÇçİÜüĞğÖö]{3,}" required>
+                            <input class="form-control mt-2" type="text" name="pob" id="pob" placeholder="Mustafakemalpaşa" pattern="[A-Za-zŞşÇçİÜüĞğÖöı]{3,}" required>
                             <div class="invalid-feedback">Doğum yeri en az 3 harf içermelidir</div>
 
                         </div>
@@ -174,9 +174,10 @@
     for(const pair of formData){
         searchParams.append(pair[0],pair[1]);
     } 
-    
 
-    fetch('http://localhost:3000/students',
+
+    if($('#addStudentForm')[0].checkValidity()){
+        fetch('http://localhost:3000/students',
     {
         method:'post',
         body : searchParams
@@ -186,6 +187,9 @@
     }).catch(function(e){
         console.log(e);
     })
+    }
+
+    
 
     })
 
