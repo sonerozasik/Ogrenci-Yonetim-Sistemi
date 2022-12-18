@@ -19,10 +19,43 @@ img{
     background-color: green;
  }
 
+ .bg-gray{
+   background-color: #f2f3f8 ;
+ }
+
  .button{
     color: white;
     width: 70px;
     margin-left: 3px;
+    padding: 0px;
     padding-top: 2px;
     padding-bottom: 4px;
  }
+
+ .pagebtn.active {
+   background-color: blue;
+   color: white;
+}
+
+.perPageBtn.active {
+   background-color: #0a6efe;
+   color: white;
+}
+
+.perPageBtn-5{
+   border: 3px solid #0a6efe;
+   border-top-left-radius: 20%;
+   border-bottom-left-radius: 20%;
+   border-right:none;
+}
+
+.perPageBtn-8{
+   border: 3px solid #0a6efe;
+}
+
+.perPageBtn-10{
+   border: 3px solid #0a6efe;
+   border-top-right-radius: 20%;
+   border-bottom-right-radius: 20%;
+   border-left:none;
+}

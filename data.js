@@ -9,7 +9,7 @@ let students = [
     {
       id: 1,
       fname: "Isim1",
-      lname: "Soyisim1",
+      lname: "ozasik",
       num: "152120171101",
       dept: "2",
       pob: "Eskişehir",

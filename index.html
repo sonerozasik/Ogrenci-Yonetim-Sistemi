@@ -11,16 +11,16 @@
     <script src="data.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body onload="getStudents()">
+<body onload="renderAll()">
     <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <div class="row justify-content-between">
-                    <div class="col-8 d-flex justify-content-center align-items-center p-5 pb-0">
+                    <div class="col-8 d-flex align-items-center p-5 pb-0">
                         <img src="esogu-logo.png">
                         <div>
-                            <h1 class="d-inline-block fs-3 text-nowrap">Eskişehir Osmangazi Üniversitesi</h1>
-                            <h2 class="d-inline-block fs-4 fw-normal text-nowrap">Öğrenci Yönetim Sistemi</h2>
+                            <h1 class="d-block fs-3 text-nowrap">Eskişehir Osmangazi Üniversitesi</h1>
+                            <h2 class="d-block fs-4 fw-normal text-nowrap">Öğrenci Yönetim Sistemi</h2>
                         </div>
 
                     </div>
@@ -36,8 +36,8 @@
                     <i class="bi bi-person-plus fs-3"></i>
                 </div>
             </div>
-            <div id="table-container" class="col-12">
-                <table id="table" class="table">
+            <div id="table-container" class="row">
+                <table  class="table m-0">
                     <thead>
                       <tr class="table-secondary" >
                         <th class="col-6 col-md-4 col-lg-3" scope="col">İsim Soyisim</th>
@@ -46,10 +46,21 @@
                         <th class="col-6 col-md-4 col-lg-3" scope="col">Yetkiler</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tableContent">
                         <tr></tr>
                     </tbody>
                   </table>
+            </div>
+            <div class="row bg-gray p-3 m-0">
+                <div class="col-5">
+                    <span><strong>25</strong> öğrenciden <strong>1-8</strong> arası gösteriliyor</span>
+                </div>
+                <div id="pageButtonContainer" class="col-5">
+                    
+                </div>
+                <div id="perPageButtonContainer" class="col-2 p-0 d-flex">
+                    
+                </div>
             </div>
         </div>
 
