@@ -5,11 +5,11 @@ const depts = {
   "4": "İnşaat Müh."
 };
 
-let students = [
+/*let students = [
     {
       id: 1,
       fname: "Isim1",
-      lname: "ozasik",
+      lname: "deneme",
       num: "152120171101",
       dept: "2",
       pob: "Eskişehir",
@@ -231,5 +231,5 @@ let students = [
       pob: "Mersin",
       dob: "2000-07-17"
     }
-  ];
+  ];*/
   

@@ -1,24 +1,27 @@
 let currPage = 1;
 let numPerPage = 8;
 let numPages = 1;
+var students=[];
 
-function renderAll(){
-  getStudents();
+
+function renderPages(){
+  renderTable();
   renderPageNums();
   renderPerPageButtons();
-
+  renderTexts();
 }
 
 
-function getStudents(){
+async function fetchDataAndRender(){
     fetch('http://localhost:3000/students')
     .then((response)=>response.json())
-    .then(data=>renderTable(data));
+    .then(data=> students = data.slice())
+    .then(()=>{ renderPages()  })
+    ;
 } 
 
 
-function renderTable(students){
-
+function renderTable(){
     const table = document.querySelector("#tableContent");
     const lastItemIndex = currPage*numPerPage;
     const firsItemIndex = lastItemIndex - numPerPage;
@@ -35,7 +38,7 @@ function renderTable(students){
           <td class="d-none d-md-table-cell">${items[i].num}</td>
           <td class="d-none d-lg-table-cell">${depts[items[i].dept]}</td>
           <td> 
-          <button class="btn button bg-red">Sil</button>
+          <button class="btn button bg-red" id="${items[i].id}" onclick="deleteStudent(this.id)">Sil</button>
           <button class="btn button bg-blue">Düzenle</button>
           <button class="btn button bg-green">Detay</button>
           </td>
@@ -43,52 +46,10 @@ function renderTable(students){
         `;
     } // end-for
     table.innerHTML = template;
-
-
-
-
-    /*for (let i = 0; i < items.length; i++) {
-
-      tr = table.insertRow(-1);
-
-
-      let tabCell1 = tr.insertCell(-1);
-      tabCell1.className="px-5";
-      tabCell1.innerHTML = items[i].fname + ' ' + items[i].lname;
-      let tabCell2 = tr.insertCell(-1);
-      tabCell2.className="d-none d-md-table-cell"
-      tabCell2.innerHTML = items[i].num;
-      let tabCell3 = tr.insertCell(-1);
-      tabCell3.className="d-none d-lg-table-cell"
-      tabCell3.innerHTML = depts[items[i].dept];
-      
-
-      let tabCell4 = tr.insertCell(-1);
-
-      const silButton = document.createElement("button");
-      silButton.className="btn button bg-red";
-      silButton.innerHTML="Sil"
-      const duzenleButton = document.createElement("button");
-      duzenleButton.className="btn button bg-blue";
-      duzenleButton.innerHTML= "Düzenle"
-      const detayButton = document.createElement("button");
-      detayButton.className="btn button bg-green";
-      detayButton.innerHTML="Detay"
-
-      tabCell4.appendChild(silButton)
-      tabCell4.appendChild(duzenleButton)
-      tabCell4.appendChild(detayButton)
-
-    }
-
-    // Now, add the newly created table with json data, to a container.
-    const divShowData = document.getElementById('table-container');
-    divShowData.innerHTML = "";
-    divShowData.appendChild(table);*/
   }
 
   function renderPageNums(){
-  const pageNumsDiv = document.querySelector("#pageButtonContainer")
+    const pageNumsDiv = document.querySelector("#pageButtonContainer")
     numPages = Math.ceil(students.length/numPerPage);
     let template = '<div>';
 
@@ -105,13 +66,13 @@ function renderTable(students){
 function pageClicked(pageNum){
   if (pageNum == currPage) return;
   currPage = pageNum;
-  renderAll();
+  fetchDataAndRender();
 } // end-pageClicked
 
 function perPageClicked(perPageNum){
   if (perPageNum == numPerPage) return;
   numPerPage = perPageNum;
-  renderAll();
+  fetchDataAndRender();
 } // end-pageClicked
 
 function renderPerPageButtons(){
@@ -125,4 +86,25 @@ function renderPerPageButtons(){
       perPageNumsDiv.innerHTML = template;
 }
 
+function renderTexts(){
+  const numberOfStudents = document.querySelector("#numberOfStudents")
+  numberOfStudents.innerHTML=students.length;
+  const numberOfInterval = document.querySelector("#numberOfInterval")
+  numberOfInterval.innerHTML=  currPage*numPerPage-numPerPage + 1 + '-' + (currPage*numPerPage > students.length ? students.length : currPage*numPerPage);
+  
+}
+
+function deleteStudent(id){
+  fetch('http://localhost:3000/students/'+id,
+      {
+          method:'delete',
+      }).then(function(response){
+          console.log(response)
+      }).catch(function(e){
+          console.log(e);
+      })
+      fetchDataAndRender();
+  }
+
+  
 

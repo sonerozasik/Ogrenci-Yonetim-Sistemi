@@ -17,7 +17,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body onload="renderAll()">
+<body onload="fetchDataAndRender()">
     <div class="container-fluid">
         <div class="row">
             <div class="col">
@@ -59,7 +59,7 @@
             </div>
             <div class="row bg-gray p-3 m-0">
                 <div class="col-5">
-                    <span><strong>25</strong> öğrenciden <strong>1-8</strong> arası gösteriliyor</span>
+                    <span><strong id="numberOfStudents"></strong> öğrenciden <strong id="numberOfInterval"></strong> arası gösteriliyor</span>
                 </div>
                 <div id="pageButtonContainer" class="col-5">
                     
@@ -178,19 +178,15 @@
 
     if($('#addStudentForm')[0].checkValidity()){
         fetch('http://localhost:3000/students',
-    {
-        method:'post',
-        body : searchParams
-    
-    }).then(function(response){
-        console.log(response)
-    }).catch(function(e){
-        console.log(e);
-    })
-    }
-
-    
-
+            {
+                method:'post',
+                body : searchParams
+            }).then(function(response){
+                console.log(response)
+            }).catch(function(e){
+                console.log(e);
+            })
+        }
     })
 
 
