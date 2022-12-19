@@ -37,7 +37,7 @@ function renderTable(){
           <td class="px-5">${items[i].fname + ' ' + items[i].lname}</td>
           <td class="d-none d-md-table-cell">${items[i].num}</td>
           <td class="d-none d-lg-table-cell">${depts[items[i].dept]}</td>
-          <td id="${items[i].id}"> 
+          <td class="d-flex flex-nowrap" id="${items[i].id}"> 
           <button class="btn button bg-red" data-bs-toggle="modal" data-bs-target="#deleteStudentModal" onclick="displayStudentInDeleteModal($(this).parent().attr('id'))">Sil</button>
           <button class="btn button bg-blue" data-bs-toggle="modal" data-bs-target="#editStudentModal" onclick="displayStudentInEditModal($(this).parent().attr('id'))">Düzenle</button>
           <button class="btn button bg-green" data-bs-toggle="modal" data-bs-target="#studentInfoModal" onclick="displayStudentInInfoModal($(this).parent().attr('id'))">Detay</button>
@@ -125,7 +125,7 @@ function displayStudentInInfoModal(id){
       lname.value = data.lname;
       dept.value = depts[data.dept];
       num.value = data.num;
-      dob.value = data.dob;
+      dob.value = data.dob.slice(5,7) + '/' + data.dob.slice(10-12)  +'/' + data.dob.slice(0,4);
       pob.value = data.pob;
     })
 }

@@ -179,6 +179,15 @@
       "dept": 2,
       "pob": "Van",
       "dob": "2002-05-11"
+    },
+    {
+      "fname": "Soner",
+      "lname": "Özaşık",
+      "num": "152120181069",
+      "dept": "1",
+      "pob": "Mustafakemalpaşa",
+      "dob": "2000-01-01",
+      "id": 24
     }
   ]
 }
