@@ -2,11 +2,11 @@ let currPage = 1;
 let numPerPage = 8;
 let numPages = 1;
 var students=[];
-
+var selectStudentId=0;
 
 function renderPages(){
-  renderTable();
   renderPageNums();
+  renderTable();
   renderPerPageButtons();
   renderTexts();
 }
@@ -38,21 +38,22 @@ function renderTable(){
           <td class="d-none d-md-table-cell">${items[i].num}</td>
           <td class="d-none d-lg-table-cell">${depts[items[i].dept]}</td>
           <td id="${items[i].id}"> 
-          <button class="btn button bg-red" onclick="deleteStudent($(this).parent().attr('id'))">Sil</button>
-          <button class="btn button bg-blue">Düzenle</button>
-          <button class="btn button bg-green" data-bs-toggle="modal" data-bs-target="#studentInfoModal" onclick="displayStudent($(this).parent().attr('id'))">Detay</button>
+          <button class="btn button bg-red" data-bs-toggle="modal" data-bs-target="#deleteStudentModal" onclick="displayStudentInDeleteModal($(this).parent().attr('id'))">Sil</button>
+          <button class="btn button bg-blue" data-bs-toggle="modal" data-bs-target="#editStudentModal" onclick="displayStudentInEditModal($(this).parent().attr('id'))">Düzenle</button>
+          <button class="btn button bg-green" data-bs-toggle="modal" data-bs-target="#studentInfoModal" onclick="displayStudentInInfoModal($(this).parent().attr('id'))">Detay</button>
           </td>
         </tr>
         `;
     } // end-for
     table.innerHTML = template;
   }
+  //onclick="deleteStudent($(this).parent().attr('id'))"
 
   function renderPageNums(){
     const pageNumsDiv = document.querySelector("#pageButtonContainer")
     numPages = Math.ceil(students.length/numPerPage);
     let template = '<div>';
-
+    if(numPages<currPage) currPage=numPages;
     for (let i=1; i<=numPages; i++){
         template += `<button style="margin:auto" 
         class="btn border border-2 pagebtn ${i==currPage? 'active': 'bg-white'}"
@@ -109,8 +110,7 @@ function deleteStudent(id){
   }
 
 
-function displayStudent(id){
-  let student;
+function displayStudentInInfoModal(id){
   const fname = document.querySelector('#si_fname');
   const lname = document.querySelector('#si_lname');
   const dept = document.querySelector('#si_dept');
@@ -127,8 +127,38 @@ function displayStudent(id){
       num.value = data.num;
       dob.value = data.dob;
       pob.value = data.pob;
-    
     })
 }
   
+function displayStudentInEditModal(id){
+  const fname = document.querySelector('#es_fname');
+  const lname = document.querySelector('#es_lname');
+  const dept = document.querySelector('#es_dept');
+  const num = document.querySelector('#es_num');
+  const dob = document.querySelector('#es_dob');
+  const pob = document.querySelector('#es_pob');
+  selectStudentId=id;
+  
+  fetch('http://localhost:3000/students/'+id)
+    .then((response)=>response.json())
+    .then((data)=> {
+      fname.value = data.fname;
+      lname.value = data.lname;
+      dept.value = data.dept;
+      num.value = data.num;
+      dob.value = data.dob;
+      pob.value = data.pob;
+    })
+}
+
+function displayStudentInDeleteModal(id){
+  const nameText = document.querySelector("#deleteStudentName")
+  selectStudentId=id;
+  
+  fetch('http://localhost:3000/students/'+id)
+    .then((response)=>response.json())
+    .then((data)=> {
+      nameText.innerHTML = data.fname + ' ' + data.lname;
+    })
+}
 

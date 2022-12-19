@@ -10,15 +10,6 @@
       "dob": "2001-07-12"
     },
     {
-      "id": 4,
-      "fname": "Isim4",
-      "lname": "Soyisim4",
-      "num": "152120171104",
-      "dept": 4,
-      "pob": "İzmir",
-      "dob": "1998-06-16"
-    },
-    {
       "id": 5,
       "fname": "Isim5",
       "lname": "Soyisim5",
@@ -188,33 +179,6 @@
       "dept": 2,
       "pob": "Van",
       "dob": "2002-05-11"
-    },
-    {
-      "id": 24,
-      "fname": "Isim24",
-      "lname": "Soyisim24",
-      "num": "152120171124",
-      "dept": 1,
-      "pob": "Aydın",
-      "dob": "2001-09-11"
-    },
-    {
-      "id": 25,
-      "fname": "Isim25",
-      "lname": "Soyisim25",
-      "num": "152120171125",
-      "dept": 3,
-      "pob": "Mersin",
-      "dob": "2000-07-17"
-    },
-    {
-      "fname": "Soner",
-      "lname": "Özaşık",
-      "num": "152120181069",
-      "dept": "1",
-      "pob": "Mustafakemalpaşa",
-      "dob": "2000-01-01",
-      "id": 26
     }
   ]
 }

@@ -193,6 +193,97 @@
           </div>
         </div>
       </div>
+
+      <!-- --------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+      <div class="modal fade" id="editStudentModal" tabindex="-1" role="dialog" aria-labelledby="editStudentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="text-start" id="editStudentModalLabel"> <i class="bi bi-info-circle-fill text-primary"></i> Öğrenciyi Düzenle</h5>
+              <button type="button" class="btn close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">x</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form id="editStudentForm" class="row needs-validation" novalidate>
+                    <div class="row">
+                        <div class="has-validation col-12 col-md-6 p-2">
+                            <label for="fname" class="form-label">İsim</label>
+                            <input class="form-control mt-2" type="text" name="fname" id="es_fname" placeholder="Soner" pattern="[A-Za-zŞşÇçİÜüĞğÖöı]{3,}" required>
+                            <div class="invalid-feedback">İsim en az 3 harf içermelidir</div>
+                        </div>
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="lname" class="form-label">Soyisim</label>
+                            <input class="form-control  mt-2" type="text" name="lname" id="es_lname" placeholder="Özaşık" pattern="[A-Za-zŞşÇçİÜüĞğÖöı]{3,}" required>
+                            <div class="invalid-feedback">Soyisim en az 3 harf içermelidir</div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="num" class="form-label">Öğrenci Numarası</label>
+                            <input class="form-control  mt-2" type="number" name="num" id="es_num" placeholder="152120181069" min="100000000000" max="999999999999" required>
+                            <div class="invalid-feedback">Öğrenci numarası 12 harf içermelidir</div>
+
+                        </div>
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="dept" class="form-label">Bölüm</label>
+                            <select class="form-select  mt-2" name="dept" id="es_dept" required>
+                                <option value="" disabled selected>Bölüm Seçiniz</option>
+                                <option value="1">Bilgisayar Müh.</option>
+                                <option value="2">Elektrik-Elektronik Müh.</option>
+                                <option value="3">Endüstri Müh.</option>
+                                <option value="4">İnşaat Müh.</option>
+                            </select>
+                            <div class="invalid-feedback">Bölüm seçiniz</div>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="pob" class="form-label" >Doğum Yeri</label>
+                            <input class="form-control mt-2" type="text" name="pob" id="es_pob" placeholder="Mustafakemalpaşa" pattern="[A-Za-zŞşÇçİÜüĞğÖöı]{3,}" required>
+                            <div class="invalid-feedback">Doğum yeri en az 3 harf içermelidir</div>
+
+                        </div>
+                        <div class="col-12 col-md-6 p-2">
+                            <label for="dob" class="form-label">Doğum Tarihi</label>
+                            <input class="form-control mt-2" type="date" name="dob" id="es_dob" required>
+                            <div class="invalid-feedback">Tarih seçiniz</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Onayla</button>
+
+                      </div>
+                </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!----------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+      <div class="modal" tabindex="-1" id="deleteStudentModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><i class="bi bi-exclamation-triangle-fill text-danger"></i> Öğrenciyi Sil</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p><strong id = "deleteStudentName"></strong> isimli öğrenciyi siliyorsunuz. Bu işlem geri alınamaz. Devam etmek istediğinize emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+              <button type="button" class="btn btn-danger" onclick="deleteStudent(selectStudentId)">Sil</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 </html>
 
@@ -218,30 +309,56 @@
         })
     })()
 
-    const addstudentform = document.querySelector('#addStudentForm');
-    addstudentform.addEventListener('submit',function (e){
-    e.preventDefault();
+    const addStudentForm = document.querySelector('#addStudentForm');
+    addStudentForm.addEventListener('submit',function (e){
+        e.preventDefault();
 
-    const formData = new FormData(this);
-    const searchParams = new URLSearchParams();
-    
-    for(const pair of formData){
-        searchParams.append(pair[0],pair[1]);
-    } 
+        const formData = new FormData(this);
+        const searchParams = new URLSearchParams();
+        
+        for(const pair of formData){
+            searchParams.append(pair[0],pair[1]);
+        } 
 
 
-    if($('#addStudentForm')[0].checkValidity()){
-        fetch('http://localhost:3000/students',
-            {
-                method:'post',
-                body : searchParams
-            }).then(function(response){
-                console.log(response)
-            }).catch(function(e){
-                console.log(e);
-            })
-        }
+        if($('#addStudentForm')[0].checkValidity()){
+            fetch('http://localhost:3000/students',
+                {
+                    method:'post',
+                    body : searchParams
+                }).then(function(response){
+                    console.log(response)
+                }).catch(function(e){
+                    console.log(e);
+                })
+            }
     })
+
+    const editStudentForm = document.querySelector('#editStudentForm');
+    editStudentForm.addEventListener('submit',function (e){
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const searchParams = new URLSearchParams();
+        
+        for(const pair of formData){
+            searchParams.append(pair[0],pair[1]);
+        } 
+
+        if($('#editStudentForm')[0].checkValidity()){
+            fetch('http://localhost:3000/students/'+selectStudentId,
+                {
+                    method:'put',
+                    body : searchParams
+                }).then(function(response){
+                    console.log(response)
+                }).catch(function(e){
+                    console.log(e);
+                })
+            }
+    })
+
+    
 
 
 </script>
