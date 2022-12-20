@@ -59,3 +59,12 @@ img{
    border-bottom-right-radius: 20%;
    border-left:none;
 }
+
+#addStudentButton{
+   background-color: #0a6efe;
+
+}
+
+#addStudentButton:hover{
+   background-color: #02357d;
+}

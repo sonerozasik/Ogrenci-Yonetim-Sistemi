@@ -38,7 +38,7 @@
             </div>
             <div class="col-12 pt-5 px-5 d-flex justify-content-between mb-2">
                 <h3 class="col-10">Öğrenci Listesi</h3>
-                <button class="btn bg-primary text-white p-0 px-3" data-bs-toggle="modal" data-bs-target="#addStudentsModal">
+                <button id="addStudentButton" class="btn text-white p-0 px-3" data-bs-toggle="modal" data-bs-target="#addStudentModal">
                     <i class="bi bi-person-plus fs-3" ></i>
                 </button>
             </div>
@@ -71,11 +71,11 @@
         </div>
 
     </div>
-    <div class="modal fade" id="addStudentsModal" tabindex="-1" role="dialog" aria-labelledby="addStudentsModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-                <h5 class="text-start" id="addStudentsModalLabel"> <i class="bi bi-info-circle-fill text-primary"></i> Eklenecek Öğrenci Bilgileri</h5>
+                <h5 class="text-start" id="addStudentModalLabel"> <i class="bi bi-info-circle-fill text-primary"></i> Eklenecek Öğrenci Bilgileri</h5>
               <button type="button" class="btn close" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">x</span>
               </button>
@@ -312,7 +312,7 @@
     const addStudentForm = document.querySelector('#addStudentForm');
     addStudentForm.addEventListener('submit',function (e){
         e.preventDefault();
-
+        
         const formData = new FormData(this);
         const searchParams = new URLSearchParams();
         
@@ -328,9 +328,14 @@
                     body : searchParams
                 }).then(function(response){
                     console.log(response)
+                }).then(()=>{
+                    $('#addStudentModal').modal('hide');
+                    fetchDataAndRender();
                 }).catch(function(e){
                     console.log(e);
                 })
+            $('#addStudentModal').modal('hide');
+            fetchDataAndRender();
             }
     })
 
@@ -352,9 +357,14 @@
                     body : searchParams
                 }).then(function(response){
                     console.log(response)
-                }).catch(function(e){
+                }).then(()=>{
+                    $('#editStudentModal').modal('hide');
+                    fetchDataAndRender();
+                })
+                .catch(function(e){
                     console.log(e);
                 })
+                
             }
     })
 

@@ -106,6 +106,7 @@ function deleteStudent(id){
       }).catch(function(e){
           console.log(e);
       })
+      $('#deleteStudentModal').modal('hide');
       fetchDataAndRender();
   }
 
